@@ -1,5 +1,13 @@
 body {
-  padding: 0;
-  margin: 1rem;
+  padding: 1rem;
+  max-width: 35rem;
+  background: white;
+  border-radius: 0.3rem;
+  border: solid silver 1px;
+}
+
+html {
   background: #EEE;
+  display: flex;
+  justify-content: center;
 }

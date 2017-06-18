@@ -1,5 +1,5 @@
-<h2>{{ title$ | async }}</h2>
-<div class="buttonBar">
+<div class="button-bar">
+  <h5 class="title">{{ title$ | async }}</h5>
   <button
     *ngFor="let tabRecord of tabData$ | async"
     [ngClass]="{ active: (activeTabId$ | async) === tabRecord?.id }"
@@ -7,11 +7,11 @@
     {{ tabRecord?.title }}
   </button>
 </div>
-<p>
+<div class="content">
   {{ (activeTab$ | async)?.text }}
   <demo-tabset
     *ngIf="(activeTab$ | async)?.subTabSet"
     [parentPath]="getSubTabSetPath((activeTab$ | async).id)"
     tabSetId="subTabSet">
   </demo-tabset>
-</p>
+</div>

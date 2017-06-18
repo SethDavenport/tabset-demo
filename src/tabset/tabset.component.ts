@@ -5,12 +5,12 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
 
 import { ITabSetRecord, ITabRecord } from './model';
-import { TabAction, SELECT_TAB, tabsetReducer } from './tabset.reducer';
-
-export const toValueList = (obs$: Observable<object>) =>
-  obs$.map(Object.values);
-export const selectActiveTab = (state: ITabSetRecord) =>
-  state && state.tabs ? state.tabs[state.activeTabId] : null;
+import {
+  activateTab,
+  tabsetReducer,
+  toValueList,
+  selectActiveTab,
+} from './tabset.redux';
 
 @Component({
   selector: 'demo-tabset',
@@ -30,16 +30,10 @@ export class TabSetComponent {
   @select(selectActiveTab)      readonly activeTab$: Observable<string>;
   @select('activeTabId')        readonly activeTabId$: Observable<string>;
 
-  getBasePath = () => {
-    return this.tabSetId ? [ ...this.parentPath, this.tabSetId ]: null;
-  }
+  getBasePath = () => [ ...this.parentPath, this.tabSetId ];
 
-  getSubTabSetPath = (activeTabId) => {
-    return [...this.getBasePath(), 'tabs', activeTabId ];
-  }
+  getSubTabSetPath = (activeTabId) =>
+    [...this.getBasePath(), 'tabs', activeTabId ];
 
-  @dispatch() activateTab = (tabId: string): TabAction => ({
-    type: SELECT_TAB,
-    tabId,
-  });
+  @dispatch() activateTab = activateTab;
 }
