@@ -1,17 +1,12 @@
 <div class="button-bar">
-  <h5 class="title">{{ title$ | async }}</h5>
+  <h5 class="title">{{ title }}</h5>
   <button
-    *ngFor="let tabRecord of tabData$ | async"
-    [ngClass]="{ active: (activeTabId$ | async) === tabRecord?.id }"
-    (click)="activateTab(tabRecord.id)">
-    {{ tabRecord?.title }}
+    *ngFor="let tab of tabs"
+    [ngClass]="{ active: isActive(tab, activeTabId$ | async) }"
+    (click)="activateTab(tab.tabId)">
+    {{ tab.title }}
   </button>
 </div>
 <div class="content">
-  {{ (activeTab$ | async)?.text }}
-  <demo-tabset
-    *ngIf="(activeTab$ | async)?.subTabSet"
-    [parentPath]="getSubTabSetPath((activeTab$ | async).id)"
-    tabSetId="subTabSet">
-  </demo-tabset>
+  <ng-content></ng-content>
 </div>

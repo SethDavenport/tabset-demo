@@ -1,9 +1,5 @@
 :host {
   display: block;
-  border: solid silver 1px;
-  padding: 0.75rem;
-  border-radius: 0.2rem;
-  background: #EEE;
   margin-top: 1rem;
   margin-bottom: 1rem;
 }

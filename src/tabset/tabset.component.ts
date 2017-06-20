@@ -1,16 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ContentChildren, QueryList, AfterContentInit, OnDestroy } from '@angular/core';
 import { WithSubStore, select, select$, dispatch } from '@angular-redux/store';
-
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/from';
+import { Subscription } from 'rxjs/Subscription';
+import { Action } from 'redux';
+import { ITabSetRecord } from './tabset.model';
+import { TabComponent } from '../tab/tab.component';
 
-import { ITabSetRecord, ITabRecord } from './model';
-import {
-  activateTab,
-  tabsetReducer,
-  toValueList,
-  selectActiveTab,
-} from './tabset.redux';
+type TabAction = Action & { tabId: number };
+const ACTIVATE_TAB = 'ACTIVATE_TAB';
+
+export function tabsetReducer(
+  state: ITabSetRecord,
+  { type, tabId }: TabAction) {
+  return type === ACTIVATE_TAB ?
+    { ...state, activeTabId: tabId } :
+    state;
+}
 
 @Component({
   selector: 'demo-tabset',
@@ -21,19 +26,38 @@ import {
   basePathMethodName: 'getBasePath',
   localReducer: tabsetReducer,
 })
-export class TabSetComponent {
-  @Input() parentPath: string[] = [];
-  @Input() tabSetId: string;
+export class TabSetComponent implements AfterContentInit, OnDestroy {
+  @Input() basePath: string[];
+  @Input() title;
+  @ContentChildren(TabComponent) tabs: QueryList<TabComponent>;
+  @select() readonly activeTabId$: Observable<number>;
 
-  @select('title')              readonly title$: Observable<string>;
-  @select$('tabs', toValueList) readonly tabData$: Observable<ITabRecord[]>;
-  @select(selectActiveTab)      readonly activeTab$: Observable<string>;
-  @select('activeTabId')        readonly activeTabId$: Observable<string>;
+  @dispatch() activateTab(tabId: number) {
+    return { type: ACTIVATE_TAB, tabId };
+  }
 
-  getBasePath = () => [ ...this.parentPath, this.tabSetId ];
+  isActive(tab: TabComponent, activeTabId: number = 0) {
+    return tab.tabId === activeTabId;
+  }
 
-  getSubTabSetPath = (activeTabId) =>
-    [...this.getBasePath(), 'tabs', activeTabId ];
+  ngAfterContentInit() {
+    this.tabs.forEach((tab: TabComponent, idx: number) => tab.tabId = idx);
+    this.subscription = this.activeTabId$.subscribe(
+      (activeTabId: number) => this.updateChildVisibility(activeTabId));
+  }
 
-  @dispatch() activateTab = activateTab;
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  private getBasePath() {
+    return this.basePath;
+  }
+
+  private updateChildVisibility = (activeTabId: number = 0): void => {
+    this.tabs.forEach((tab: TabComponent) =>
+      tab.isVisible = (tab.tabId === activeTabId));
+  }
+
+  private subscription: Subscription;
 }

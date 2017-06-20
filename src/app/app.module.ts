@@ -5,19 +5,19 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
 
 import { AppComponent } from './app.component';
 import { TabSetComponent } from '../tabset/tabset.component';
-
-import { INITIAL_STATE } from './model';
+import { TabComponent } from '../tab/tab.component';
 import { appReducer } from './app.reducer';
+import { IAppState, INITIAL_STATE } from './app.model';
 
 @NgModule({
-  declarations: [ AppComponent, TabSetComponent ],
+  declarations: [ AppComponent, TabSetComponent, TabComponent ],
   imports: [ BrowserModule, NgReduxModule ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(
-    store: NgRedux<any>,
+    store: NgRedux<IAppState>,
     devTools: DevToolsExtension) {
     store.configureStore(
       appReducer,

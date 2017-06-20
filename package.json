@@ -4,13 +4,13 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --aot",
     "build": "ng build",
     "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
-    "@angular-redux/store": "6.5.2",
+    "@angular-redux/store": "6.5.3",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/core": "^4.0.0",

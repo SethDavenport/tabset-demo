@@ -28,11 +28,7 @@
       140
     ],
     "member-access": false,
-    "member-ordering": [
-      true,
-      "static-before-instance",
-      "variables-before-functions"
-    ],
+    "member-ordering": false,
     "no-arg": true,
     "no-bitwise": true,
     "no-console": [
@@ -105,13 +101,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "demo",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      "demo",
       "kebab-case"
     ],
     "use-input-property-decorator": true,

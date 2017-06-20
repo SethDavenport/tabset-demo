@@ -1,12 +1,64 @@
 <h1>@angular-redux/store TabSet Demo</h1>
 
-<p>Keeping component state in the store with `@WithSubStore`.</p>
+<p>Keeping component state in the store with <code>@WithSubStore</code>.</p>
 
-<demo-tabset tabSetId="tabset1">
+<demo-tabset
+  [basePath]="['tabset1']"
+  title="Lipsum for European Charsets">
+  <demo-tab title="Latin">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </demo-tab>
+  <demo-tab title="Greek">
+    Λορεμ ιπσθμ δολορ σιτ αμετ, σολθμ vοcεντ ει cθμ, στετ vερι
+    cθ σιτ. Διcατ σολθτα αππετερε σεδ εα, εοσ cετερο δισcερε cονσεqθθντθρ ετ. Θσθ νθλλα αππετερε δετερρθισσετ ιν. Ιδ μεα qθοδσι αβηορρεαντ, cθ ταμqθαμ γλοριατθρ εαμ, προμπτα δελενιτι εθ εθμ.
+  </demo-tab>
+  <demo-tab title="Cyrillic">
+    Лорем ипсум долор сит амет, ин хас ребум нумяуам адиписци, сит ет пхаедрум суавитате. Дуо омнес утрояуе улламцорпер не. Ест сапиентем интерессет еи. Вис еи алияуип ехпетенда десеруиссе.
+  </demo-tab>
 </demo-tabset>
 
-<demo-tabset tabSetId="tabset2">
+<demo-tabset
+  [basePath]="['tabset2']"
+  title="Lipsum for Asian Characters">
+  <demo-tab title="Japanese">
+    新社ほふ国関リホ位2号ロユ行警チテモム態局ル雲険ょねらや全監表ヨタソク了様
+    ょもぼ校練ナヌチヱ脳史ニ経都ひば供康トルちと歴品のき要堀混ゅむイに。定びゃ無野ノヲレサ被芸スせーふ主2句ラはド知図シム年便ホミ長官ヲリミフ防彦ホモオ況経改権むば副入ルネ全誇誤郡栃えせ。両りとく実質イル記数リワミ悲題ヤ貴正兵8変ればッゆ鑑公多イぴぼ人74練く広族被置展ねご。
+  </demo-tab>
+  <demo-tab title="Chinese">
+    真社散閉月精異経都転禁想都作要行方。象歌断時疑富面振重椅議当開道人飲屋限択回。乳区受長航新葛聞崎並査九意健山物治写新裏。医鉛要書多約査野母独案党瞳多暫還問平。河発古国権負育同伯禁的新批。食最禁紀東会慶要整覧力土役少能通点配。治有和無麻票長備責開容賠迫神戻契査岩。外一事計書正済流終情倫説間知現。
+  </demo-tab>
 </demo-tabset>
 
-<demo-tabset tabSetId="tabset3">
+<h2>I heard you like tabs...</h2>
+
+<demo-tabset [basePath]="['tabset3']" title="Charset Grouping">
+  <demo-tab title="Europe">
+    ...so I put tabs in your tabs...
+    <demo-tabset [basePath]="['tabset3', 'europe']">
+      <demo-tab title="Latin">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </demo-tab>
+      <demo-tab title="Greek">
+        Λορεμ ιπσθμ δολορ σιτ αμετ, σολθμ vοcεντ ει cθμ, στετ vερι
+        cθ σιτ. Διcατ σολθτα αππετερε σεδ εα, εοσ cετερο δισcερε cονσεqθθντθρ ετ. Θσθ νθλλα αππετερε δετερρθισσετ ιν. Ιδ μεα qθοδσι αβηορρεαντ, cθ ταμqθαμ γλοριατθρ εαμ, προμπτα δελενιτι εθ εθμ.
+      </demo-tab>
+      <demo-tab title="Cyrillic">
+        Лорем ипсум долор сит амет, ин хас ребум нумяуам адиписци, сит ет пхаедрум суавитате. Дуо омнес утрояуе улламцорпер не. Ест сапиентем интерессет еи. Вис еи алияуип ехпетенда десеруиссе.
+      </demo-tab>
+    </demo-tabset>
+  </demo-tab>
+  <demo-tab title="Asia Pacific">
+    ...so you can tab while you tab!
+    <demo-tabset [basePath]="['tabset3', 'apac']">
+      <demo-tab title="Japanese">
+        新社ほふ国関リホ位2号ロユ行警チテモム態局ル雲険ょねらや全監表ヨタソク了様
+        ょもぼ校練ナヌチヱ脳史ニ経都ひば供康トルちと歴品のき要堀混ゅむイに。定びゃ無野ノヲレサ被芸スせーふ主2句ラはド知図シム年便ホミ長官ヲリミフ防彦ホモオ況経改権むば副入ルネ全誇誤郡栃えせ。両りとく実質イル記数リワミ悲題ヤ貴正兵8変ればッゆ鑑公多イぴぼ人74練く広族被置展ねご。
+      </demo-tab>
+      <demo-tab title="Chinese">
+        真社散閉月精異経都転禁想都作要行方。象歌断時疑富面振重椅議当開道人飲屋限択回。乳区受長航新葛聞崎並査九意健山物治写新裏。医鉛要書多約査野母独案党瞳多暫還問平。河発古国権負育同伯禁的新批。食最禁紀東会慶要整覧力土役少能通点配。治有和無麻票長備責開容賠迫神戻契査岩。外一事計書正済流終情倫説間知現。
+      </demo-tab>
+    </demo-tabset>
+  </demo-tab>
 </demo-tabset>
